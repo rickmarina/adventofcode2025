@@ -47,24 +47,21 @@ public class Day2 : IDay
 
         foreach ((decimal min, decimal max) in ranges)
         {
-            System.Console.Write($"{min} - {max} :");
+            Console.Write($"{min} - {max} :");
             for (var i = min; i<= max; i++)
             {
-                string str = i.ToString();
-                int n = str.Length;
-
-                var repeated = RepeatedBlocksStr(str); 
+                var repeated = RepeatedBlocksStr(i.ToString()); 
                 if (repeated > 0)
                 {
                     total++;
                     sum+=i;
-                    System.Console.Write($" {i} ");
+                    Console.Write($" {i} ");
                 }
             }
 
-            System.Console.WriteLine();
+            Console.WriteLine();
         }
-        System.Console.WriteLine($"Total invalid: {total} sum: {sum} ");
+        Console.WriteLine($"Total invalid: {total} sum: {sum} ");
     }
 
     public static int RepeatedBlocksStr(string str)
