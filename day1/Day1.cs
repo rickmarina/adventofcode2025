@@ -1,4 +1,5 @@
-namespace adventofcode2025.day1;
+namespace adventofcode2025;
+
 
 /// <summary>
 /// --- Day 1: Secret Entrance ---

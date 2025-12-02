@@ -1,9 +1,9 @@
-﻿using AdventOfCode2024.Day2;
+﻿using adventofcode2025;
 
 Console.WriteLine("Advent of code 2025!");
 
 
-IDay day = new AdventOfCode2024.Day2.Day2();
+IDay day = new Day2();
 day.SolvePart2();
 
 

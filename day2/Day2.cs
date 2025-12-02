@@ -1,4 +1,4 @@
-namespace AdventOfCode2024.Day2;
+namespace adventofcode2025;
 
 /// <summary>
 /// --- Day 2: Gift Shop ---
