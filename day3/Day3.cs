@@ -11,54 +11,65 @@ public class Day3 : IDay
     {
         var banks = File.ReadAllLines("./day3/input.txt");
         int n = banks[0].Length;
-        int sum = 0; 
+        int sum = 0;
 
         foreach (string bank in banks)
         {
             System.Console.Write($"bank: {bank} ");
 
-            int idx = Array.FindIndex(bank.ToCharArray(), x=> x == bank.Max()); 
-            if (idx == n-1) 
-                idx = Array.FindIndex(bank.ToCharArray(), x=> x == bank[..^1].Max()); 
+            int idx = Array.FindIndex(bank.ToCharArray(), x => x == bank.Max());
+            if (idx == n - 1)
+                idx = Array.FindIndex(bank.ToCharArray(), x => x == bank[..^1].Max());
 
             //get max joltage 
-            string maxjoltage = $"{bank[idx]}{bank[(idx+1)..].Max()}";
+            string maxjoltage = $"{bank[idx]}{bank[(idx + 1)..].Max()}";
             System.Console.WriteLine($"max joltage: {maxjoltage}");
             sum += int.Parse(maxjoltage);
         }
 
         System.Console.WriteLine($"sum: {sum}");
 
-        
+
     }
 
+    //173065202451341
     public void SolvePart2()
     {
-        
+
         var banks = File.ReadAllLines("./day3/input.txt");
         int n = banks[0].Length;
-        decimal sum = 0; 
+        decimal sum = 0;
 
         foreach (string bank in banks)
         {
-            System.Console.WriteLine($"bank: {bank} ");
-            string maxjoltage = "";
+            // System.Console.WriteLine($"bank: {bank} ");
+            char[] maxjoltage = new char[12];
 
-            int idx1 = 0; 
-            int idx2 = n-12+1; 
+            int idx1 = 0;
+            int idx2 = n - 12 + 1;
 
-            for (int i=0; i< 12; i++)
+            for (int i = 0; i < 12; i++)
             {
-                var serie = bank[idx1..idx2];
-                var maxSerie = serie.Max();
-                var maxIdx = Array.FindIndex(serie.ToCharArray(), x=> x == maxSerie);
-                idx1 = idx1 + maxIdx + 1;
-                idx2++;
-                maxjoltage = $"{maxjoltage}{maxSerie}";
-            }
+                ReadOnlySpan<char> span = bank.AsSpan(idx1, idx2- idx1);
 
-            System.Console.WriteLine($"max joltage: {maxjoltage}");
-            sum += decimal.Parse(maxjoltage);
+                // Search for max char in span
+                char maxChar = span[0];
+                int maxIdx = 0;
+
+                for (int j = 1; j < span.Length; j++)
+                {
+                    if (span[j] > maxChar)
+                    {
+                        maxChar = span[j];
+                        maxIdx = j;
+                    }
+                }
+
+                maxjoltage[i] = maxChar;
+                idx1 += maxIdx + 1;
+                idx2++;
+            }
+            sum += decimal.Parse(new string(maxjoltage));
         }
         System.Console.WriteLine($"sum: {sum}");
     }
