@@ -1,13 +1,16 @@
-﻿using adventofcode2025;
+﻿using System.Diagnostics;
+using adventofcode2025;
 
 Console.WriteLine("Advent of code 2025!");
 
+Stopwatch sw = new(); 
 
-IDay day = new Day2();
+sw.Start(); 
+IDay day = new Day3();
 day.SolvePart2();
 
 
-// var r = Day2.RepeatedBlocksStr("1188511885");
+sw.Stop();
+System.Console.WriteLine($"Time elapsed: {sw.ElapsedMilliseconds} ms");
 
-// System.Console.WriteLine(r);
 
