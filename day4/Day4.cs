@@ -1,3 +1,5 @@
+using System.Security;
+
 namespace adventofcode2025;
 
 /// <summary>
@@ -23,7 +25,7 @@ public class Day4 : IDay
                 if (map.At((y, x)) != '@')
                     continue;
 
-                int t = CountRollsAround(map, y, x);
+                int t = RollsAround(map, y, x);
                 if (t < 4)
                 {
                     mapFinal[y][x] = 'x';
@@ -38,30 +40,18 @@ public class Day4 : IDay
 
     }
 
-    private int CountRollsAround(char[][] map, int r, int c)
-    {
-        int count = 0;
-        foreach (var point in map.GetNeighbours8(r, c))
-        {
-            if (map.InBounds(point) && map.At(point) == '@')
-                count++;
-        }
-        return count;
-    }
+    private static int RollsAround(char[][] map, int r, int c) => map.GetNeighbours8(r, c).Where(map.InBounds).Count(x=> map.At(x) =='@');
 
     public void SolvePart2()
     {
         var map = File.ReadAllLines("./day4/input.txt").Select(x => x.ToCharArray()).ToArray();
         map.Print();
-        int ans = 0;
-        int partialAns;
+        (int total, int partial) = (0, 0);
 
         do
         {
-            partialAns = 0;
-
-            var mapFinal = Helpers.CopyMatrix(map);
-
+            partial = 0;
+            var mapPartial = Helpers.CopyMatrix(map);
             for (int y = 0; y < map.Length; y++)
             {
                 for (int x = 0; x < map[0].Length; x++)
@@ -69,20 +59,20 @@ public class Day4 : IDay
                     if (map.At((y, x)) != '@')
                         continue;
 
-                    int t = CountRollsAround(map, y, x);
+                    int t = RollsAround(map, y, x);
                     if (t < 4)
                     {
-                        mapFinal[y][x] = 'x';
-                        partialAns++;
+                        mapPartial[y][x] = 'x';
+                        partial++;
                     }
                 }
             }
-            ans += partialAns;
-            mapFinal.Print();
-            map = Helpers.CopyMatrix(mapFinal);
+            total += partial;
+            mapPartial.Print();
+            map = Helpers.CopyMatrix(mapPartial);
 
-        } while (partialAns > 0);
+        } while (partial > 0);
 
-        System.Console.WriteLine($"Answer: {ans}");
+        System.Console.WriteLine($"Answer: {total}");
     }
 }
