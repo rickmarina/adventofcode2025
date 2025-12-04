@@ -69,8 +69,6 @@ public class Helpers
         }
     }
 
-    public static bool InBounds(char[][] map, int r, int c) => (r >= 0 && r < map.Length && c >= 0 && c < map[0].Length);
-    
     public static void RotateMatrixClockwise(char[][] matrix)
     {
          int n = matrix.Length;

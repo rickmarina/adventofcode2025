@@ -6,9 +6,8 @@ Console.WriteLine("Advent of code 2025!");
 Stopwatch sw = new(); 
 
 sw.Start(); 
-IDay day = new Day3();
+IDay day = new Day4();
 day.SolvePart2();
-
 
 sw.Stop();
 System.Console.WriteLine($"Time elapsed: {sw.ElapsedMilliseconds} ms");
