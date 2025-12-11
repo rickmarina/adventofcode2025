@@ -1,5 +1,3 @@
-using System.Security;
-
 namespace adventofcode2025;
 
 /// <summary>
